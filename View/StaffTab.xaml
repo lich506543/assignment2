@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="assignment2.View.StaffTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:assignment2.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid Background="#FFE5E5E5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Text patial-filter" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+            <!-- Note: This TextBox is filtered by name, so it needs to have a name (controls with functions need to have a name to facilitate the setting of Event Handler) -->
+            <TextBox x:Name="CoordinatorListTextBox" HorizontalAlignment="Left" Height="40" Margin="207,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" RenderTransformOrigin="1.416,-3.773" TextChanged="CoordinatorListTextBox_TextChanged" FontSize="24" KeyUp="CoordinatorListTextBox_KeyUp"/>
+            <Label Content="Category filter" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" FontSize="24"/>
+            <!-- Note: This ComboBox is filtered by category, so it needs to have a name (all functional controls need to have a name, which is convenient for setting Event Handler) -->
+            <ComboBox x:Name="CoordinatorListComboBox" HorizontalAlignment="Left" Margin="207,55,0,0" VerticalAlignment="Top" Width="263" FontSize="24" Height="40"
+                 ItemsSource="{Binding Source={StaticResource coordinatorCategory}}" SelectionChanged="CoordinatorListComboBox_SelectionChanged"/>
+            <!-- Note: This ListBox has the function when the selection changes, so it needs to have a name (the control with function needs to have a name, it is convenient to set the Event Handler) -->
+            <ListBox x:Name="CoordinatorListListBox" HorizontalAlignment="Left" Height="790" Margin="10,100,0,0" VerticalAlignment="Top" Width="460" FontSize="24"
+                 ItemsSource="{Binding Source={StaticResource coordinatorList}}" SelectionChanged="CoordinatorListListBox_SelectionChanged" />
+            <!-- Note: The total StackPanel must be named -->
+            <StackPanel x:Name="CoordinatorDetailStackPanel" Grid.Column="1">
+                <StackPanel Height="400" Orientation="Horizontal">
+                    <StackPanel Width="500" Orientation="Horizontal">
+                        <StackPanel Width="150">
+                            <Label Content="ID:" FontSize="24" Height="50"/>
+                            <Label Content="Name:" FontSize="24" Height="50"/>
+                            <Label Content="Title:" FontSize="24" Height="50"/>
+                            <Label Content="Branch:" FontSize="24" Height="50"/>
+                            <Label Content="Phone:" FontSize="24" Height="50"/>
+                            <Label Content="Postal Code:" FontSize="24" Height="50"/>
+                            <Label Content="Email:" FontSize="24" Height="50"/>
+                            <Label Content="Categoty:" FontSize="24" Height="50"/>
+                        </StackPanel>
+                        <StackPanel Width="350">
+                            <Label Content="{Binding Path=coordinatorID}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=firstName}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=coordinatorTitle}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=cityBranch}" FontSize="24" Height="50"/>
+                            <Label x:Name="testLabel" Content="{Binding Path=phoneNumber}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=postalCode}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=coordinatorEmail}" FontSize="24" Height="50"/>
+                            <Label Content="{Binding Path=coordinatorCategory}" FontSize="24" Height="50"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Width="301">
+                        <Image Height="400"
+                           Source="{Binding Path=coordinatorPhoto}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Height="50
+                        "/>
+                <StackPanel Height="225">
+                    <Label Content="Coordinator's working time:" Height="46" FontSize="24"/>
+                    <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Height="175" ItemsSource="{Binding Path=worktingTimes}" FontSize="24">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Day" Binding="{Binding day}"/>
+                            <DataGridTextColumn Header="Start" Binding="{Binding start}"/>
+                            <DataGridTextColumn Header="End" Binding="{Binding end}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Height="215">
+                    <Label Content="Coordinated states:" Height="50" FontSize="24"/>
+                    <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Height="165" ItemsSource="{Binding Path=coordinatedStates}" FontSize="24">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="State Code" Binding="{Binding stateCode}"/>
+                            <DataGridTextColumn Header="State Name" Binding="{Binding stateName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
